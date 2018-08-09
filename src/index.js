@@ -36,16 +36,16 @@ const plcAuthenticate = (email, password) => {
      }
      return response.json().then(getJwt).catch(handleError);
    };
-   return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/user_token`, requestOptions).then(handleSuccess).catch(handleError);
+   return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_tokens`, requestOptions).then(handleSuccess).catch(handleError);
 };
 
-const User = ApplicationRecord.extend({
+const PlcUser = ApplicationRecord.extend({
   static: {
-    jsonapiType: "users"
+    jsonapiType: "plc_users"
   },
   attrs: {
-    transactions: hasMany(),
-    subscriptions: hasMany(),
+    plcTransactions: hasMany(),
+    plcSubscriptions: hasMany(),
     firstName: attr(),
     lastName: attr(),
     email: attr(),
@@ -74,15 +74,15 @@ const User = ApplicationRecord.extend({
   }
 })
 
-const Transaction = ApplicationRecord.extend({
+const PlcTransaction = ApplicationRecord.extend({
   static: {
-    jsonapiType: "transactions"
+    jsonapiType: "plc_transactions"
   },
   attrs: {
-    user: belongsTo(),
-    subscription: belongsTo(),
-    campaign: belongsTo(),
-    lineItems: hasMany(),
+    plcUser: belongsTo(),
+    plcSubscription: belongsTo(),
+    plcCampaign: belongsTo(),
+    plcLineItems: hasMany(),
     amount: attr(),
     closeDate: attr(),
     digitalWalletService: attr(),
@@ -97,13 +97,13 @@ const Transaction = ApplicationRecord.extend({
   }
 })
 
-const Subscription = ApplicationRecord.extend({
+const PlcSubscription = ApplicationRecord.extend({
   static: {
-    jsonapiType: "subscriptions"
+    jsonapiType: "plc_subscriptions"
   },
   attrs: {
-    user: belongsTo(),
-    campaign: belongsTo(),
+    plcUser: belongsTo(),
+    plcCampaign: belongsTo(),
     cancelDate: attr(),
     amount: attr(),
     dateEstablished: attr(),
@@ -114,9 +114,9 @@ const Subscription = ApplicationRecord.extend({
   }
 })
 
-const Product = ApplicationRecord.extend({
+const PlcProduct = ApplicationRecord.extend({
   static: {
-    jsonapiType: "products"
+    jsonapiType: "plc_products"
   },
   attrs: {
     isActive: attr(),
@@ -128,12 +128,12 @@ const Product = ApplicationRecord.extend({
   }
 })
 
-const LineItem = ApplicationRecord.extend({
+const PlcLineItem = ApplicationRecord.extend({
   static: {
-    jsonapiType: "lineItems"
+    jsonapiType: "plc_line_items"
   },
   attrs: {
-    transaction: belongsTo(),
+    plcTransaction: belongsTo(),
     isDonation: attr(),
     isProduct: attr(),
     listPrice: attr(),
@@ -146,13 +146,13 @@ const LineItem = ApplicationRecord.extend({
   }
 })
 
-const Campaign = ApplicationRecord.extend({
+const PlcCampaign = ApplicationRecord.extend({
   static: {
-    jsonapiType: "campaigns"
+    jsonapiType: "plc_campaigns"
   },
   attrs: {
-    transaction: hasMany(),
-    recurringDonations: hasMany(),
+    plcTransactions: hasMany(),
+    plcSubscriptions: hasMany(),
     endDate: attr(),
     isActive: attr(),
     name: attr(),
