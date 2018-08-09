@@ -29,10 +29,11 @@ module.exports = {
     };
   
     return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_tokens`, requestOptions).then((response) => {
+
       if (response.ok) {
         return response.json().then((json) => {
           localStorage.setItem("plcJwt", json.jwt);
-          return json.jwt;
+          return response;
         });
       } else {
         return response.json().then((response) => {
@@ -164,32 +165,4 @@ module.exports = {
       uniqueName: attr()
     }
   })
-};
-
-const plcAuthenticate = (email, password) => {
-  const requestBody = JSON.stringify({
-    auth: {
-      email: email,
-      password: password
-    }
-  });
-  const requestOptions = {
-    method: "POST",
-    body: requestBody,
-    headers: { "Content-Type": "application/json" },
-    credentials: "same-origin"
-  };
-
-  return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_tokens`, requestOptions).then((response) => {
-    if (response.ok) {
-      return response.json().then((json) => {
-        localStorage.setItem("plcJwt", json.jwt);
-        return json.jwt;
-      });
-    } else {
-      return response.json().then((response) => {
-        return response;
-      });
-    }
-  });
 };
