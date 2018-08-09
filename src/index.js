@@ -32,8 +32,9 @@ module.exports = {
 
       if (response.ok) {
         return response.json().then((json) => {
-          localStorage.setItem("plcJwt", json.jwt);
-          return response;
+          const jwt = json.jwt
+          localStorage.setItem("plcJwt", jwt);
+          return { jwt: jwt };
         });
       } else {
         return response.json().then((response) => {
