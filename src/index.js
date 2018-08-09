@@ -161,3 +161,5 @@ const PlcCampaign = ApplicationRecord.extend({
     uniqueName: attr()
   }
 })
+
+export { plcAuthenticate, PlcCampaign, PlcLineItem, PlcProduct, PlcSubscription, PlcTransaction, PlcUser };
