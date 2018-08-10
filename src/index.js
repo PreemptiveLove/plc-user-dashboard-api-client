@@ -1,9 +1,8 @@
 import { JSORMBase, attr, belongsTo, hasMany } from "jsorm";
 
-let ApplicationRecord = JSORMBase.extend({
+const ApplicationRecord = JSORMBase.extend({
   static: {
-    jwt: undefined,
-    jwtStorage: false,
+    jwtStorage: "plcJwt",
     baseUrl: "https://plc-synchronize.herokuapp.com",
     apiNamespace: "/api/v1",
     generateAuthHeader: function(token) {
@@ -32,7 +31,7 @@ module.exports = {
         if (response.ok) {
           return response.json().then((json) => {
             const jwt = json.jwt
-            ApplicationRecord.jwt = jwt;
+            localStorage.setItem("plcJwt", jwt);
             resolve({ jwt: jwt });
           });
         } else {
