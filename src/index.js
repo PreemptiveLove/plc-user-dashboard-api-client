@@ -14,7 +14,7 @@ const ApplicationRecord = JSORMBase.extend({
 
 module.exports = {
 
-  plcAuthenticate: (email, password) => {
+  authenticate: (email, password) => {
     const requestBody = JSON.stringify({
       auth: {
         email: email,
@@ -27,20 +27,20 @@ module.exports = {
       headers: { "Content-Type": "application/json" },
       credentials: "same-origin"
     };
-  
     return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_tokens`, requestOptions).then((response) => {
-
-      if (response.ok) {
-        return response.json().then((json) => {
-          const jwt = json.jwt
-          localStorage.setItem("plcJwt", jwt);
-          return { jwt: jwt };
-        });
-      } else {
-        return response.json().then((response) => {
-          return response;
-        });
-      }
+      return new Promise((resolve, reject) => {
+        if (response.ok) {
+          return response.json().then((json) => {
+            const jwt = json.jwt
+            localStorage.setItem("plcJwt", jwt);
+            resolve({ jwt: jwt });
+          });
+        } else {
+          return response.json().then((response) => {
+            reject(response);
+          });
+        }
+      });
     });
   },
 
