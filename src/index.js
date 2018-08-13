@@ -1,4 +1,4 @@
-import { JSORMBase, attr, belongsTo, hasMany } from "jsorm";
+import { JSORMBase, attr, belongsTo, hasMany, hasOne } from "jsorm";
 
 const ApplicationRecord = JSORMBase.extend({
   static: {
@@ -106,6 +106,7 @@ module.exports = {
       jsonapiType: "plc_subscriptions"
     },
     attrs: {
+      plcPaymentMethod: hasOne(),
       plcUser: belongsTo(),
       plcCampaign: belongsTo(),
       cancelDate: attr(),
@@ -164,5 +165,29 @@ module.exports = {
       originatingLandingPage: attr(),
       uniqueName: attr()
     }
+  }),
+
+  PlcPaymentMethod: ApplicationRecord.extend({
+    static: {
+      jsonapiType: "plc_payment_methods"
+    },
+    attrs: {
+      plcSubscriptions: belongsTo(),
+      stripeSourceId: attr(),
+      addressCity: attr(),
+      addressCountry: attr(),
+      addressLine1: attr(),
+      addressLine2: attr(),
+      addressState: attr(),
+      addressZip: attr(),
+      brand: attr(),
+      country: attr(),
+      expirationMonth: attr(),
+      expirationYear: attr(),
+      last4: attr(),
+      bankName: attr(),
+      routingNumber: attr()
+    }
   })
+
 };
