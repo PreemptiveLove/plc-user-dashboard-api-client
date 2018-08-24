@@ -43,6 +43,27 @@ module.exports = {
     });
   },
 
+  requestMagicLink: (email) => {
+    const requestBody = JSON.stringify({
+      email: email
+    });
+    const requestOptions = {
+      method: "POST",
+      body: requestBody,
+      headers: { "Content-Type": "application/json" },
+      credentials: "same-origin"
+    };
+    return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_magic_links`, requestOptions).then((response) => {
+      return new Promise((resolve, reject) => {
+        if (response.ok) {
+          return resolve(true);
+        } else {
+          return reject(response);
+        }
+      });
+    });
+  },
+
   PlcUser: ApplicationRecord.extend({
     static: {
       jsonapiType: "plc_users"
