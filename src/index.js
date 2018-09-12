@@ -43,6 +43,23 @@ module.exports = {
     });
   },
 
+  authenticateFromUrl: (urlString) => {
+    let params = new URL(urlString).searchParams;
+    const jwt = params.get('plcJwt')
+    return new Promise((resolve, reject) => {
+      if (jwt != null) {
+        localStorage.setItem('plcJwt', jwt);
+        resolve({ jwt: jwt });
+      } else {
+        reject(false);
+      }
+    });
+  },
+
+  isAuthenticated: () => {
+    return localStorage.getItem("plcJwt") != null
+  },
+
   requestMagicLink: (email) => {
     const requestBody = JSON.stringify({
       email: email
@@ -118,7 +135,11 @@ module.exports = {
       shopifyDiscountCode: attr(),
       stageName: attr(),
       taxDeductibleAmount: attr(),
-      transactionType: attr()
+      transactionType: attr(),
+      stripeTransactionId: attr(),
+      authorizeTransactionId: attr(),
+      paypalTransactionId: attr(),
+      shopifyTransactionId: attr()
     }
   }),
 
@@ -184,7 +205,8 @@ module.exports = {
       name: attr(),
       startDate: attr(),
       originatingLandingPage: attr(),
-      uniqueName: attr()
+      uniqueName: attr(),
+      displayName: attr()
     }
   }),
 
