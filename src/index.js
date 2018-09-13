@@ -171,7 +171,8 @@ module.exports = {
       isProduct: attr(),
       isRefugeeMade: attr(),
       productCode: attr(),
-      sku: attr()
+      sku: attr(),
+      name: attr()
     }
   }),
 
