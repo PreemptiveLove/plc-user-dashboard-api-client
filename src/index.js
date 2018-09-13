@@ -181,6 +181,7 @@ module.exports = {
     },
     attrs: {
       plcTransaction: belongsTo(),
+      plcProduct: belongsTo(),
       isDonation: attr(),
       isProduct: attr(),
       listPrice: attr(),
