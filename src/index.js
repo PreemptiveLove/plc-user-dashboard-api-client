@@ -112,7 +112,8 @@ module.exports = {
       phone: attr(),
       religion: attr(),
       title: attr(),
-      twitter: attr()
+      twitter: attr(),
+      birthdate: attr()
     }
   }),
 
