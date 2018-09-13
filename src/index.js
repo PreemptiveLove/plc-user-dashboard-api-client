@@ -139,7 +139,8 @@ module.exports = {
       stripeTransactionId: attr(),
       authorizeTransactionId: attr(),
       paypalTransactionId: attr(),
-      shopifyTransactionId: attr()
+      shopifyTransactionId: attr(),
+      belongsToSubscription: attr()
     }
   }),
 
