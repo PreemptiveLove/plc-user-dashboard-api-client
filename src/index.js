@@ -150,7 +150,7 @@ module.exports = {
       jsonapiType: "plc_subscriptions"
     },
     attrs: {
-      plcPaymentMethod: hasOne(),
+      plcPaymentMethod: belongsTo(),
       plcUser: belongsTo(),
       plcCampaign: belongsTo(),
       cancelDate: attr(),
@@ -219,7 +219,7 @@ module.exports = {
       jsonapiType: "plc_payment_methods"
     },
     attrs: {
-      plcSubscriptions: belongsTo(),
+      plcSubscriptions: hasMany(),
       stripeSourceId: attr(),
       addressCity: attr(),
       addressCountry: attr(),
