@@ -159,7 +159,8 @@ module.exports = {
       installments: attr(),
       lastPaymentDate: attr(),
       nextPaymentDate: attr(),
-      openEndedStatus: attr()
+      openEndedStatus: attr(),
+      paymentProcessor: attr()
     }
   }),
 
