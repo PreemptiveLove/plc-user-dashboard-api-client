@@ -81,6 +81,10 @@ module.exports = {
     });
   },
 
+  logout: () => {
+    return localStorage.removeItem("plcJwt");
+  },
+
   PlcUser: ApplicationRecord.extend({
     static: {
       jsonapiType: "plc_users"
