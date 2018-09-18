@@ -117,7 +117,9 @@ module.exports = {
       religion: attr(),
       title: attr(),
       twitter: attr(),
-      birthdate: attr()
+      birthdate: attr(),
+      firstPurchaseDate: attr(),
+      firstTransactionDate: attr()
     }
   }),
 
