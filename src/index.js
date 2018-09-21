@@ -2,9 +2,9 @@ import { JSORMBase, attr, belongsTo, hasMany, hasOne } from "jsorm";
 
 const ApplicationRecord = JSORMBase.extend({
   static: {
-    jwtStorage: "plcJwt",
-    baseUrl: "https://plc-synchronize.herokuapp.com",
-    apiNamespace: "/api/v1",
+    jwtStorage:         "plcJwt",
+    baseUrl:            "https://plc-synchronize.herokuapp.com",
+    apiNamespace:       "/api/v1",
     generateAuthHeader: function(token) {
       return "Bearer " + token;
     }
@@ -16,15 +16,15 @@ module.exports = {
   authenticate: (email, password) => {
     const requestBody = JSON.stringify({
       auth: {
-        email: email,
+        email:    email,
         password: password
       }
     });
     const requestOptions = {
-      method: "POST",
-      body: requestBody,
-      headers: { "Content-Type": "application/json" },
-      credentials: "same-origin"
+      method:       "POST",
+      body:         requestBody,
+      headers:      { "Content-Type": "application/json" },
+      credentials:  "same-origin"
     };
     return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_tokens`, requestOptions).then((response) => {
       return new Promise((resolve, reject) => {
@@ -65,10 +65,10 @@ module.exports = {
       email: email
     });
     const requestOptions = {
-      method: "POST",
-      body: requestBody,
-      headers: { "Content-Type": "application/json" },
-      credentials: "same-origin"
+      method:       "POST",
+      body:         requestBody,
+      headers:      { "Content-Type": "application/json" },
+      credentials:  "same-origin"
     };
     return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_magic_links`, requestOptions).then((response) => {
       return new Promise((resolve, reject) => {
@@ -90,36 +90,36 @@ module.exports = {
       jsonapiType: "plc_users"
     },
     attrs: {
-      plcTransactions: hasMany(),
-      plcSubscriptions: hasMany(),
-      firstName: attr(),
-      lastName: attr(),
-      email: attr(),
-      password: attr(),
-      facebook: attr(),
-      firstDonationDate: attr({ persist: false }),
-      gender: attr(),
-      hasOptedOutOfEmail: attr(),
-      instagram: attr(),
-      lastDonationDate: attr({ persist: false }),
-      linkedin: attr(),
-      mailOptOut: attr(),
-      mailingCity: attr(),
-      mailingCountry: attr(),
-      mailingPostalCode: attr(),
-      mailingState: attr(),
-      mailingStreet: attr(),
-      maritalStatus: attr(),
-      middleName: attr(),
-      mobilePhone: attr(),
-      parentalStatus: attr(),
-      phone: attr(),
-      religion: attr(),
-      title: attr(),
-      twitter: attr(),
-      birthdate: attr(),
-      firstPurchaseDate: attr(),
-      firstTransactionDate: attr()
+      plcTransactions:      hasMany(),
+      plcSubscriptions:     hasMany(),
+      firstName:            attr(),
+      lastName:             attr(),
+      email:                attr({ persist: false }),
+      password:             attr(),
+      facebook:             attr(),
+      firstDonationDate:    attr({ persist: false }),
+      gender:               attr(),
+      hasOptedOutOfEmail:   attr(),
+      instagram:            attr(),
+      lastDonationDate:     attr({ persist: false }),
+      linkedin:             attr(),
+      mailOptOut:           attr(),
+      mailingCity:          attr(),
+      mailingCountry:       attr(),
+      mailingPostalCode:    attr(),
+      mailingState:         attr(),
+      mailingStreet:        attr(),
+      maritalStatus:        attr(),
+      middleName:           attr(),
+      mobilePhone:          attr(),
+      parentalStatus:       attr(),
+      phone:                attr(),
+      religion:             attr(),
+      title:                attr(),
+      twitter:              attr(),
+      birthdate:            attr(),
+      firstPurchaseDate:    attr({ persist: false }),
+      firstTransactionDate: attr({ persist: false })
     }
   }),
 
@@ -128,26 +128,26 @@ module.exports = {
       jsonapiType: "plc_transactions"
     },
     attrs: {
-      plcUser: belongsTo(),
-      plcSubscription: belongsTo(),
-      plcCampaign: belongsTo(),
-      plcLineItems: hasMany(),
-      amount: attr(),
-      closeDate: attr(),
-      digitalWalletService: attr(),
-      isClosed: attr(),
-      isWon: attr(),
-      isRefund: attr(),
-      shopifyDiscountAmount: attr(),
-      shopifyDiscountCode: attr(),
-      stageName: attr(),
-      taxDeductibleAmount: attr(),
-      transactionType: attr(),
-      stripeTransactionId: attr(),
-      authorizeTransactionId: attr(),
-      paypalTransactionId: attr(),
-      shopifyTransactionId: attr(),
-      belongsToSubscription: attr()
+      plcUser:                belongsTo(),
+      plcSubscription:        belongsTo(),
+      plcCampaign:            belongsTo(),
+      plcLineItems:           hasMany(),
+      amount:                 attr({ persist: false }),
+      closeDate:              attr({ persist: false }),
+      digitalWalletService:   attr({ persist: false }),
+      isClosed:               attr({ persist: false }),
+      isWon:                  attr({ persist: false }),
+      isRefund:               attr({ persist: false }),
+      shopifyDiscountAmount:  attr({ persist: false }),
+      shopifyDiscountCode:    attr({ persist: false }),
+      stageName:              attr({ persist: false }),
+      taxDeductibleAmount:    attr({ persist: false }),
+      transactionType:        attr({ persist: false }),
+      stripeTransactionId:    attr({ persist: false }),
+      authorizeTransactionId: attr({ persist: false }),
+      paypalTransactionId:    attr({ persist: false }),
+      shopifyTransactionId:   attr({ persist: false }),
+      belongsToSubscription:  attr({ persist: false })
     }
   }),
 
@@ -156,17 +156,17 @@ module.exports = {
       jsonapiType: "plc_subscriptions"
     },
     attrs: {
-      plcPaymentMethod: belongsTo(),
-      plcUser: belongsTo(),
-      plcCampaign: belongsTo(),
-      cancelDate: attr(),
-      amount: attr(),
-      dateEstablished: attr(),
-      installments: attr(),
-      lastPaymentDate: attr(),
-      nextPaymentDate: attr(),
-      openEndedStatus: attr(),
-      paymentProcessor: attr()
+      plcPaymentMethod: hasOne(),
+      plcUser:          belongsTo(),
+      plcCampaign:      belongsTo(),
+      cancelDate:       attr({ persist: false }),
+      amount:           attr(),
+      dateEstablished:  attr({ persist: false }),
+      installments:     attr({ persist: false }),
+      lastPaymentDate:  attr({ persist: false }),
+      nextPaymentDate:  attr({ persist: false }),
+      openEndedStatus:  attr(),
+      paymentProcessor: attr({ persist: false })
     }
   }),
 
@@ -175,13 +175,13 @@ module.exports = {
       jsonapiType: "plc_products"
     },
     attrs: {
-      isActive: attr(),
-      isDonation: attr(),
-      isProduct: attr(),
-      isRefugeeMade: attr(),
-      productCode: attr(),
-      sku: attr(),
-      name: attr()
+      isActive:       attr({ persist: false }),
+      isDonation:     attr({ persist: false }),
+      isProduct:      attr({ persist: false }),
+      isRefugeeMade:  attr({ persist: false }),
+      productCode:    attr({ persist: false }),
+      sku:            attr({ persist: false }),
+      name:           attr({ persist: false })
     }
   }),
 
@@ -191,16 +191,16 @@ module.exports = {
     },
     attrs: {
       plcTransaction: belongsTo(),
-      plcProduct: belongsTo(),
-      isDonation: attr(),
-      isProduct: attr(),
-      listPrice: attr(),
-      name: attr(),
-      productCode: attr(),
-      quantity: attr(),
-      taxableAmount: attr(),
-      totalPrice: attr(),
-      unitPrice: attr()
+      plcProduct:     belongsTo(),
+      isDonation:     attr({ persist: false }),
+      isProduct:      attr({ persist: false }),
+      listPrice:      attr({ persist: false }),
+      name:           attr({ persist: false }),
+      productCode:    attr({ persist: false }),
+      quantity:       attr({ persist: false }),
+      taxableAmount:  attr({ persist: false }),
+      totalPrice:     attr({ persist: false }),
+      unitPrice:      attr({ persist: false })
     }
   }),
 
@@ -209,15 +209,15 @@ module.exports = {
       jsonapiType: "plc_campaigns"
     },
     attrs: {
-      plcTransactions: hasMany(),
-      plcSubscriptions: hasMany(),
-      endDate: attr(),
-      isActive: attr(),
-      name: attr(),
-      startDate: attr(),
-      originatingLandingPage: attr(),
-      uniqueName: attr(),
-      displayName: attr()
+      plcTransactions:        hasMany(),
+      plcSubscriptions:       hasMany(),
+      endDate:                attr({ persist: false }),
+      isActive:               attr({ persist: false }),
+      name:                   attr({ persist: false }),
+      startDate:              attr({ persist: false }),
+      originatingLandingPage: attr({ persist: false }),
+      uniqueName:             attr({ persist: false }),
+      displayName:            attr({ persist: false })
     }
   }),
 
@@ -226,21 +226,21 @@ module.exports = {
       jsonapiType: "plc_payment_methods"
     },
     attrs: {
-      plcSubscriptions: hasMany(),
-      stripeSourceId: attr(),
-      addressCity: attr(),
-      addressCountry: attr(),
-      addressLine1: attr(),
-      addressLine2: attr(),
-      addressState: attr(),
-      addressZip: attr(),
-      brand: attr(),
-      country: attr(),
-      expirationMonth: attr(),
-      expirationYear: attr(),
-      last4: attr(),
-      bankName: attr(),
-      routingNumber: attr()
+      plcSubscriptions: belongsTo(),
+      stripeSourceId:   attr({ persist: false }),
+      addressCity:      attr({ persist: false }),
+      addressCountry:   attr({ persist: false }),
+      addressLine1:     attr({ persist: false }),
+      addressLine2:     attr({ persist: false }),
+      addressState:     attr({ persist: false }),
+      addressZip:       attr({ persist: false }),
+      brand:            attr({ persist: false }),
+      country:          attr({ persist: false }),
+      expirationMonth:  attr({ persist: false }),
+      expirationYear:   attr({ persist: false }),
+      last4:            attr({ persist: false }),
+      bankName:         attr({ persist: false }),
+      routingNumber:    attr({ persist: false })
     }
   })
 
