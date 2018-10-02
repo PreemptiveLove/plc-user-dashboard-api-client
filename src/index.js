@@ -1,6 +1,6 @@
-import { JSORMBase, attr, belongsTo, hasMany, hasOne } from "jsorm";
+import { SpraypaintBase, attr, belongsTo, hasMany, hasOne } from "spraypaint";
 
-const ApplicationRecord = JSORMBase.extend({
+const ApplicationRecord = SpraypaintBase.extend({
   static: {
     jwtStorage:         "plcJwt",
     baseUrl:            "https://plc-synchronize.herokuapp.com",
@@ -477,4 +477,16 @@ module.exports = {
 //     bankName:         attr({ persist: false }),
 //     routingNumber:    attr({ persist: false })
 //   }
+// });
+
+// authenticate("calebuharrison@gmail.com", "password").then((response) => {
+//   PlcSubscription.includes("plc_payment_method").find(1).then((response) => {
+//     let subscription = response.data;   
+//     subscription.amount = 103.41;
+//     subscription.nextPaymentDate = "2018-10-22";
+//     subscription.save().then((response) => {
+//       console.log(response);
+//       console.log(subscription);
+//     });
+//   });
 // });
