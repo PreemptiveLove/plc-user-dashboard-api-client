@@ -94,7 +94,7 @@ module.exports = {
       plcSubscriptions:     hasMany(),
       firstName:            attr(),
       lastName:             attr(),
-      email:                attr({ persist: false }),
+      email:                attr(),
       password:             attr(),
       facebook:             attr(),
       firstDonationDate:    attr({ persist: false }),
