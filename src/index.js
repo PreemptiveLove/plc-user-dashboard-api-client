@@ -1,5 +1,7 @@
 import { SpraypaintBase, attr, belongsTo, hasMany, hasOne } from "spraypaint";
 
+const jwtDecode = require('jwt-decode');
+
 const ApplicationRecord = SpraypaintBase.extend({
   static: {
     jwtStorage:         "plcJwt",
@@ -57,7 +59,16 @@ module.exports = {
   },
 
   isAuthenticated: () => {
-    return localStorage.getItem("plcJwt") != null
+    let flag = false;
+    const jwt = localStorage.getItem("plcJwt");
+    if (jwt != null) {
+      const decodedJwt = jwtDecode(jwt);
+      const now = Date.now().valueOf() / 1000;
+      if (typeof decodedJwt.exp === 'undefined' || decodedJwt.exp < now) {
+        flag = true;
+      }
+    }
+    return flag;
   },
 
   requestMagicLink: (email) => {
@@ -293,7 +304,16 @@ module.exports = {
 // };
 
 // const isAuthenticated = () => {
-//   return localStorage.getItem("plcJwt") != null
+//   let flag = false;
+//   const jwt = localStorage.getItem("plcJwt");
+//   if (jwt != null) {
+//     const decodedJwt = jwtDecode(jwt);
+//     const now = Date.now().valueOf() / 1000;
+//     if (typeof decodedJwt.exp === 'undefined' || decodedJwt.exp < now) {
+//       flag = true;
+//     }
+//   }
+//   return flag;
 // };
 
 // const requestMagicLink = (email) => {
