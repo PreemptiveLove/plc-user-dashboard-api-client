@@ -64,7 +64,7 @@ module.exports = {
     if (jwt != null) {
       const decodedJwt = jwtDecode(jwt);
       const now = Date.now().valueOf() / 1000;
-      if (typeof decodedJwt.exp === 'undefined' || decodedJwt.exp < now) {
+      if (typeof decodedJwt.exp === 'undefined' || now < decodedJwt.exp) {
         flag = true;
       }
     }
@@ -309,7 +309,7 @@ module.exports = {
 //   if (jwt != null) {
 //     const decodedJwt = jwtDecode(jwt);
 //     const now = Date.now().valueOf() / 1000;
-//     if (typeof decodedJwt.exp === 'undefined' || decodedJwt.exp < now) {
+//     if (typeof decodedJwt.exp === 'undefined' || now < decodedJwt.exp) {
 //       flag = true;
 //     }
 //   }
