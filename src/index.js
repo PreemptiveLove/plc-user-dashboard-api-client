@@ -228,6 +228,7 @@ module.exports = {
     },
     attrs: {
       plcSubscriptions: belongsTo(),
+      stripeCustomerId: attr({ persist: false }),
       stripeSourceId:   attr({ persist: false }),
       addressCity:      attr({ persist: false }),
       addressCountry:   attr({ persist: false }),
@@ -241,7 +242,8 @@ module.exports = {
       expirationYear:   attr({ persist: false }),
       last4:            attr({ persist: false }),
       bankName:         attr({ persist: false }),
-      routingNumber:    attr({ persist: false })
+      routingNumber:    attr({ persist: false }),
+      updateToken:      attr()
     }
   })
 
@@ -328,7 +330,7 @@ module.exports = {
 //     plcSubscriptions:     hasMany(),
 //     firstName:            attr(),
 //     lastName:             attr(),
-//     email:                attr({ persist: false }),
+//     email:                attr(),
 //     password:             attr(),
 //     facebook:             attr(),
 //     firstDonationDate:    attr({ persist: false }),
@@ -479,14 +481,8 @@ module.exports = {
 //   }
 // });
 
-// authenticate("calebuharrison@gmail.com", "password").then((response) => {
-//   PlcSubscription.includes("plc_payment_method").find(1).then((response) => {
-//     let subscription = response.data;   
-//     subscription.amount = 103.41;
-//     subscription.nextPaymentDate = "2018-10-22";
-//     subscription.save().then((response) => {
-//       console.log(response);
-//       console.log(subscription);
-//     });
-//   });
+// authenticate("gormantaylor@gmail.com", "p@ssword").then((response) => {
+//   PlcTransaction.includes([{plc_line_items: 'plc_product'}, 'plc_campaign']).per(5).page(1).stats({total: 'count'}).all().then((response) => {
+//     console.log(response)
+//   })
 // });
