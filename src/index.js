@@ -73,7 +73,7 @@ module.exports = {
     return flag;
   },
 
-  requestMagicLink: (email) => {
+  requestLoginLink: (email) => {
     const requestBody = JSON.stringify({
       email: email
     });
@@ -83,7 +83,7 @@ module.exports = {
       headers:      { "Content-Type": "application/json" },
       credentials:  "same-origin"
     };
-    return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_magic_links`, requestOptions).then((response) => {
+    return fetch(`${ApplicationRecord.baseUrl}${ApplicationRecord.apiNamespace}/plc_user_login_links`, requestOptions).then((response) => {
       return new Promise((resolve, reject) => {
         if (response.ok) {
           return resolve(true);
