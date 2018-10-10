@@ -98,6 +98,21 @@ module.exports = {
     return localStorage.removeItem("plcJwt");
   },
 
+  cancelSubscription: (id, reason, description, emailOptOut) => {
+    PlcSubscription.find(id).then((response) => {
+      subscription = response.data;
+      subscription.openEndedStatus = "Closed";
+      subscription.cancellationReason = reason;
+      subscription.cancellationReasonDescription = description;
+      subscription.save()
+    })
+    PlcUser.first().then((response) => {
+      user = response.data;
+      user.hasOptedOutOfEmail = emailOptOut
+      user.save()
+    })
+  },
+
   PlcUser: ApplicationRecord.extend({
     static: {
       jsonapiType: "plc_users"
@@ -180,7 +195,9 @@ module.exports = {
       lastPaymentDate:  attr({ persist: false }),
       nextPaymentDate:  attr(),
       openEndedStatus:  attr(),
-      paymentProcessor: attr({ persist: false })
+      paymentProcessor: attr({ persist: false }),
+      cancellationReasonDescription: attr(),
+      cancellationReason: attr()
     }
   }),
 
