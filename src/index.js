@@ -13,18 +13,19 @@ const ApplicationRecord = SpraypaintBase.extend({
   }
 })
 
-const setBaseUrl = (baseUrl) => {
-    ApplicationRecord.baseUrl = baseUrl;
-    PlcUser.baseUrl = baseUrl;
-    PlcCampaign.baseUrl = baseUrl;
-    PlcLineItem.baseUrl = baseUrl;
-    PlcPaymentMethod.baseUrl = baseUrl;
-    PlcProduct.baseUrl = baseUrl;
-    PlcSubscription.baseUrl = baseUrl;
-    PlcTransaction.baseUrl = baseUrl;
-}
 
 module.exports = {
+
+  setBaseUrl: (baseUrl) => {
+      ApplicationRecord.baseUrl = baseUrl;
+      PlcUser.baseUrl = baseUrl;
+      PlcCampaign.baseUrl = baseUrl;
+      PlcLineItem.baseUrl = baseUrl;
+      PlcPaymentMethod.baseUrl = baseUrl;
+      PlcProduct.baseUrl = baseUrl;
+      PlcSubscription.baseUrl = baseUrl;
+      PlcTransaction.baseUrl = baseUrl;
+  },
 
   setEnvironment: (env) => {
     if (env == 'production') {
