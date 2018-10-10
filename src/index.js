@@ -5,7 +5,7 @@ const jwtDecode = require('jwt-decode');
 const ApplicationRecord = SpraypaintBase.extend({
   static: {
     jwtStorage:         "plcJwt",
-    baseUrl:            "https://plc-synchronize.herokuapp.com",
+    baseUrl:            "",
     apiNamespace:       "/api/v1",
     generateAuthHeader: function(token) {
       return "Bearer " + token;
@@ -13,9 +13,7 @@ const ApplicationRecord = SpraypaintBase.extend({
   }
 })
 
-module.exports = {
-
-  setBaseUrl: (baseUrl) => {
+const setBaseUrl = (baseUrl) => {
     ApplicationRecord.baseUrl = baseUrl;
     PlcUser.baseUrl = baseUrl;
     PlcCampaign.baseUrl = baseUrl;
@@ -24,6 +22,16 @@ module.exports = {
     PlcProduct.baseUrl = baseUrl;
     PlcSubscription.baseUrl = baseUrl;
     PlcTransaction.baseUrl = baseUrl;
+}
+
+module.exports = {
+
+  setEnvironment: (env) => {
+    if (env == 'production') {
+      setBaseUrl("https://plc-treehouse-api.herokuapp.com");
+    } else {
+      setBaseUrl("https://plc-synchronize.herokuapp.com");
+    }
   },
 
   authenticate: (email, password) => {
