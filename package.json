@@ -27,6 +27,6 @@
     "jsorm": "^1.3.22",
     "jwt-decode": "^2.2.0",
     "spraypaint": "^0.2.0",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.11.3"
   }
 }
